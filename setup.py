@@ -23,7 +23,13 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/000xs/terminalos",
-    packages=find_packages(),
+    packages=[
+        "terminalos",
+        "terminalos.apps",
+        "terminalos.config",
+        "terminalos.core",
+        "terminalos.utils"
+    ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
