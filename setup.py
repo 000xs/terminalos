@@ -16,7 +16,7 @@ def read_requirements(filename):
 
 setup(
     name="terminalos",
-    version="1.0.1",
+    version="1.0.2",
     author="000x",
     author_email="SITHUMSS9122@gmacil.com",
     description="A complete operating system experience in your terminal",

@@ -1,6 +1,6 @@
 """TerminalOS - A complete operating system experience in your terminal."""
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "Terminal Developer"
 __email__ = "dev@terminalos.com"
 __description__ = "A complete operating system experience in your terminal"
