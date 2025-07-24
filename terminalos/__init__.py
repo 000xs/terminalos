@@ -7,8 +7,7 @@ __description__ = "A complete operating system experience in your terminal"
 
 from .core.app import TerminalOSApp
 # from .config.settings import Settings
-
-# from .config.settings import Settings
+from . import config
  
 
-__all__ = ["TerminalOSApp", "__version__"]
+__all__ = ["TerminalOSApp", "config", "__version__"]
