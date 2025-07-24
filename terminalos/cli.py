@@ -3,6 +3,7 @@
 import click
 import sys
 import os
+import json
 import asyncio
 from pathlib import Path
 from typing import Optional, Dict, Any
@@ -102,31 +103,11 @@ def run(ctx, app, workspace):
 @click.option('--force', is_flag=True, help='Force reinstall')
 def install(package_name, upgrade, force):
     """Install TerminalOS packages and extensions."""
-    from .apps.package_manager import PackageManager
+    click.echo("📦 Package management coming in v1.1!")
+    click.echo("💡 Currently, TerminalOS includes all core applications.")
     
-    if not package_name:
-        # Show available packages
-        manager = PackageManager()
-        packages = manager.list_available()
-        
-        click.echo("📦 Available Packages:")
-        for pkg in packages:
-            status = "✅ Installed" if manager.is_installed(pkg['name']) else "⬜ Available"
-            click.echo(f"  {pkg['name']}: {pkg['description']} [{status}]")
-        return
-    
-    manager = PackageManager()
-    
-    with click.progressbar(length=100, label=f'Installing {package_name}') as bar:
-        try:
-            success = manager.install(package_name, upgrade=upgrade, force=force, 
-                                    progress_callback=lambda p: bar.update(p))
-            if success:
-                click.echo(f"✅ Successfully installed {package_name}")
-            else:
-                click.echo(f"❌ Failed to install {package_name}")
-        except Exception as e:
-            click.echo(f"❌ Error installing {package_name}: {e}")
+    if package_name:
+        click.echo(f"❌ Package '{package_name}' not found in current version")
 
 
 @cli.command()
@@ -134,14 +115,8 @@ def install(package_name, upgrade, force):
 @click.option('--purge', is_flag=True, help='Remove all data')
 def uninstall(package_name, purge):
     """Uninstall TerminalOS packages."""
-    from .apps.package_manager import PackageManager
-    
-    if click.confirm(f'Remove {package_name}?'):
-        manager = PackageManager()
-        if manager.uninstall(package_name, purge=purge):
-            click.echo(f"✅ Successfully removed {package_name}")
-        else:
-            click.echo(f"❌ Failed to remove {package_name}")
+    click.echo("📦 Package management coming in v1.1!")
+    click.echo(f"❌ Cannot uninstall '{package_name}' in current version")
 
 
 @cli.command()
@@ -333,10 +308,7 @@ from textual.screen import Screen
 from textual.widgets import Header, Footer, Static
 from textual.binding import Binding
 
-from terminalos.apps.base import BaseApp
-
-
-class {name.title()}App(BaseApp):
+class {name.title()}App(Screen):
     """Custom {name} application."""
     
     BINDINGS = [
