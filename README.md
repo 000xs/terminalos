@@ -75,20 +75,20 @@ terminalos
 ## 🛠️ Installation Methods
 
 ### Method 1: Direct Launcher
-
-```bash
-git clone https://github.com/000xs/terminalos.git
-cd terminalos
-python start_terminalos.py
-```
-
-### Method 2: Package Install
+ 
 
 ```bash
 git clone https://github.com/000xs/terminalos.git
 cd terminalos
 pip install -e .
-terminalos
+
+```
+```
+terminalos  
+```
+or
+``` 
+tos
 ```
 
  
