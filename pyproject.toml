@@ -8,10 +8,8 @@ dynamic = ["version"]
 description = "A complete operating system experience in your terminal"
 readme = "README.md"
 requires-python = ">=3.8"
-license = {text = "MIT"}
-authors = [
-    {name = "000x", email = "SITHUMSS9122@gmail.com"},
-]
+license = { text = "MIT" }
+authors = [{ name = "000x", email = "SITHUMSS9122@gmail.com" }]
 keywords = ["terminal", "os", "tui", "cli", "desktop"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -41,14 +39,8 @@ dev = [
     "mypy>=0.991",
     "pre-commit>=2.20.0",
 ]
-audio = [
-    "pygame>=2.3.0",
-    "mutagen>=1.47.0",
-]
-media = [
-    "pillow>=9.0.0",
-    "opencv-python>=4.5.0",
-]
+audio = ["pygame>=2.3.0", "mutagen>=1.47.0"]
+media = ["pillow>=9.0.0", "opencv-python>=4.5.0"]
 
 [project.urls]
 Homepage = "https://github.com/000xs/terminalos"
@@ -59,6 +51,9 @@ Repository = "https://github.com/000xs/terminalos"
 [project.scripts]
 terminalos = "terminalos.__main__:main"
 tos = "terminalos.__main__:main"
+
+[tool.setuptools]
+packages = ["terminalos", "terminalos.core", "terminalos.config"]
 
 [tool.setuptools_scm]
 write_to = "terminalos/_version.py"
@@ -72,5 +67,3 @@ python_version = "3.8"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
-
- 
