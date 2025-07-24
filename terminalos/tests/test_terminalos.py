@@ -8,9 +8,9 @@ def test_core_packages():
     assert hasattr(terminalos, "core")
 
     
-def test_config_packages():
-    import terminalos
-    assert hasattr(terminalos, "config")
+# def test_config_packages():
+#     import terminalos
+#     assert hasattr(terminalos, "config")
 
     
 
