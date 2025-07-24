@@ -25,10 +25,10 @@ setup(
     url="https://github.com/000xs/terminalos",
     packages=[
         "terminalos",
-        "terminalos.apps",
-        "terminalos.config",
-        "terminalos.core",
-        "terminalos.utils"
+        # "terminalos.apps",
+        # "terminalos.config",
+        # "terminalos.core",
+        # "terminalos.utils"
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
