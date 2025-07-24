@@ -6,6 +6,7 @@ import os
 import json
 import asyncio
 from pathlib import Path
+from datetime import datetime
 from typing import Optional, Dict, Any
 
 from .core.app import TerminalOSApp
@@ -252,7 +253,7 @@ def create_workspace(name: str):
         "apps": [],
         "layout": "default",
         "theme": "dark",
-        "created": str(Path.ctime(Path.now()))
+        "created": str(datetime.now())
     }
     
     workspace_file.write_text(json.dumps(workspace_config, indent=2))

@@ -25,11 +25,13 @@ jobs:
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e .[test]   # or pip install -r requirements-test.txt
+          pip install pytest            # <-- add this
+          pip install -e .
 
       - name: Run tests
         run: |
-          pytest -v
+          python -m pip install --upgrade pip
+          pip install -r requirements-test.txt
 
   build-and-deploy:
     name: Build wheel & upload to PyPI
