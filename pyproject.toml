@@ -52,8 +52,8 @@ Repository = "https://github.com/000xs/terminalos"
 terminalos = "terminalos.__main__:main"
 tos = "terminalos.__main__:main"
 
-[tool.setuptools]
-packages = ["terminalos", "terminalos.core", "terminalos.config"]
+# [tool.setuptools]
+# packages = ["terminalos", "terminalos.core", "terminalos.config"]
 
 [tool.setuptools_scm]
 write_to = "terminalos/_version.py"
