@@ -37,13 +37,17 @@ jobs:
       - name: Build executable (Unix)
         if: runner.os != 'Windows'
         run: |
-          PYTHONPATH="${PWD}" pyinstaller \
+          pyinstaller \
             --name TerminalOS \
             --onefile \
-            --collect-all terminalos \
-            --hidden-import textual \
-            --hidden-import click \
-            --hidden-import watchdog \
+            --paths . \
+            --hidden-import=terminalos.config \
+            --hidden-import=terminalos.core \
+            --hidden-import=terminalos.utils \
+            --hidden-import=terminalos.apps \
+            --hidden-import=textual \
+            --hidden-import=click \
+            --hidden-import=watchdog \
             --clean \
             run_terminalos.py
 
@@ -54,13 +58,17 @@ jobs:
         if: runner.os == 'Windows'
         shell: cmd
         run: |
-          set PYTHONPATH=%CD% && pyinstaller ^
+          pyinstaller ^
             --name TerminalOS ^
             --onefile ^
-            --collect-all terminalos ^
-            --hidden-import textual ^
-            --hidden-import click ^
-            --hidden-import watchdog ^
+            --paths . ^
+            --hidden-import=terminalos.config ^
+            --hidden-import=terminalos.core ^
+            --hidden-import=terminalos.utils ^
+            --hidden-import=terminalos.apps ^
+            --hidden-import=textual ^
+            --hidden-import=click ^
+            --hidden-import=watchdog ^
             --clean ^
             run_terminalos.py
 

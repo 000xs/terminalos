@@ -1,2 +1,1 @@
-"""__init__ core Package"""
-import os
+"""Core components for TerminalOS."""

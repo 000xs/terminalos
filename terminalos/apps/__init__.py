@@ -1,2 +1,1 @@
-"apps TOS"
-import os
+"""Applications for TerminalOS."""
