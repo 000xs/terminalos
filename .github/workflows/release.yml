@@ -40,16 +40,11 @@ jobs:
           pyinstaller \
             --name TerminalOS \
             --onefile \
-            --paths . \
-            --hidden-import=terminalos.config \
-            --hidden-import=terminalos.core \
-            --hidden-import=terminalos.utils \
-            --hidden-import=terminalos.apps \
             --hidden-import=textual \
             --hidden-import=click \
             --hidden-import=watchdog \
             --clean \
-            run_terminalos.py
+            terminalos/__main__.py
 
       # -------------------------------------------------
       # Windows build (cmd, caret continuation)
@@ -61,16 +56,11 @@ jobs:
           pyinstaller ^
             --name TerminalOS ^
             --onefile ^
-            --paths . ^
-            --hidden-import=terminalos.config ^
-            --hidden-import=terminalos.core ^
-            --hidden-import=terminalos.utils ^
-            --hidden-import=terminalos.apps ^
             --hidden-import=textual ^
             --hidden-import=click ^
             --hidden-import=watchdog ^
             --clean ^
-            run_terminalos.py
+            terminalos/__main__.py
 
       # -------------------------------------------------
       # Package & upload
