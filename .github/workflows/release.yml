@@ -1,0 +1,62 @@
+name: Release Executables
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build executable with PyInstaller
+        run: |
+          pyinstaller \
+            --name TerminalOS \
+            --onefile \
+            --hidden-import textual \
+            --hidden-import click \
+            --hidden-import watchdog \
+            --clean \
+            run_terminalos.py
+
+      # Name the final artefact depending on OS
+      - name: Prepare artefact
+        shell: bash
+        run: |
+          mkdir dist_final
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            mv dist/TerminalOS.exe dist_final/TerminalOS-windows.exe
+          elif [ "${{ runner.os }}" = "macOS" ]; then
+            mv dist/TerminalOS dist_final/TerminalOS-macos
+          else
+            mv dist/TerminalOS dist_final/TerminalOS-linux
+          fi
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist_final/*
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false

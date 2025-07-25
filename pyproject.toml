@@ -39,6 +39,7 @@ dev = [
     "mypy>=0.991",
     "pre-commit>=2.20.0",
 ]
+test = ["pytest>=7.0.0"]  # Added test dependencies
 audio = ["pygame>=2.3.0", "mutagen>=1.47.0"]
 media = ["pillow>=9.0.0", "opencv-python>=4.5.0"]
 
@@ -52,8 +53,14 @@ Repository = "https://github.com/000xs/terminalos"
 terminalos = "terminalos.__main__:main"
 tos = "terminalos.__main__:main"
 
-# [tool.setuptools]
-# packages = ["terminalos", "terminalos.core", "terminalos.config"]
+[tool.setuptools]
+# Explicitly list all packages and subpackages
+packages = [
+    "terminalos",
+    "terminalos.core",
+    "terminalos.config",
+    # Add any other subpackages here
+]
 
 [tool.setuptools_scm]
 write_to = "terminalos/_version.py"

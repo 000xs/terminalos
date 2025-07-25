@@ -1,0 +1,4 @@
+include terminalos/*.py
+include terminalos/core/*.py
+include terminalos/config/*.py
+recursive-include terminalos *.py

@@ -1,0 +1,51 @@
+name: Test Executables
+
+on:
+  workflow_run:
+    workflows: ["Release Executables"]
+    types:
+      - completed
+
+jobs:
+  test:
+    name: Test ${{ matrix.asset }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            asset: TerminalOS-windows.exe
+          - os: ubuntu-latest
+            asset: TerminalOS-linux
+          - os: macos-latest
+            asset: TerminalOS-macos
+
+    steps:
+      - name: Download release asset
+        uses: robinraju/release-downloader@v1
+        with:
+          tag: ${{ github.event.workflow_run.head_branch }} # the tag that triggered the release
+          fileName: ${{ matrix.asset }}
+          out-file-path: ./dist
+
+      - name: Make binary executable (Unix only)
+        if: runner.os != 'Windows'
+        run: chmod +x ./dist/${{ matrix.asset }}
+
+      - name: Smoke test — version flag
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            ./dist/${{ matrix.asset }} --version
+          else
+            ./dist/${{ matrix.asset }} --version
+          fi
+
+      - name: Smoke test — doctor command
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            ./dist/${{ matrix.asset }} doctor
+          else
+            ./dist/${{ matrix.asset }} doctor
+          fi
