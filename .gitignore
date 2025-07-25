@@ -121,3 +121,5 @@ logs/
 screenshots/
 workspaces/
 custom_apps/
+build/
+dis/
