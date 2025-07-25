@@ -30,10 +30,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-
-      # ------------------------------------------------
-      # Windows build (cmd + caret continuation)
-      # ------------------------------------------------
+          
+      # Windows
       - name: Build executable (Windows)
         if: runner.os == 'Windows'
         shell: cmd
@@ -41,21 +39,21 @@ jobs:
           pyinstaller ^
             --name TerminalOS ^
             --onefile ^
+            --collect-all terminalos ^
             --hidden-import textual ^
             --hidden-import click ^
             --hidden-import watchdog ^
             --clean ^
             run_terminalos.py
 
-      # ------------------------------------------------
-      # macOS / Linux build (bash + back-slash continuation)
-      # ------------------------------------------------
+      # macOS / Linux
       - name: Build executable with PyInstaller
         if: runner.os != 'Windows'
         run: |
           pyinstaller \
             --name TerminalOS \
             --onefile \
+            --collect-all terminalos \
             --hidden-import textual \
             --hidden-import click \
             --hidden-import watchdog \
