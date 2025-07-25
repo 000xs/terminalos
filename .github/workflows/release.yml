@@ -6,8 +6,8 @@ on:
       - "v*.*.*"
 
 permissions:
-    contents: write    
-    
+  contents: write
+
 jobs:
   build:
     name: Build on ${{ matrix.os }}
@@ -31,7 +31,27 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
+      # ------------------------------------------------
+      # Windows build (cmd + caret continuation)
+      # ------------------------------------------------
+      - name: Build executable (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          pyinstaller ^
+            --name TerminalOS ^
+            --onefile ^
+            --hidden-import textual ^
+            --hidden-import click ^
+            --hidden-import watchdog ^
+            --clean ^
+            run_terminalos.py
+
+      # ------------------------------------------------
+      # macOS / Linux build (bash + back-slash continuation)
+      # ------------------------------------------------
       - name: Build executable with PyInstaller
+        if: runner.os != 'Windows'
         run: |
           pyinstaller \
             --name TerminalOS \
@@ -42,7 +62,9 @@ jobs:
             --clean \
             run_terminalos.py
 
-      # Name the final artefact depending on OS
+      # ------------------------------------------------
+      # Package artifacts
+      # ------------------------------------------------
       - name: Prepare artefact
         shell: bash
         run: |
