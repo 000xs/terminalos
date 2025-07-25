@@ -30,27 +30,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-          
-      # Windows
-      - name: Build executable (Windows)
-        if: runner.os == 'Windows'
-        shell: cmd
-        run: |
-          pyinstaller ^
-            --name TerminalOS ^
-            --onefile ^
-            --collect-all terminalos ^
-            --hidden-import textual ^
-            --hidden-import click ^
-            --hidden-import watchdog ^
-            --clean ^
-            run_terminalos.py
 
-      # macOS / Linux
-      - name: Build executable with PyInstaller
+      # -------------------------------------------------
+      # Linux / macOS build (bash, back-slash continuation)
+      # -------------------------------------------------
+      - name: Build executable (Unix)
         if: runner.os != 'Windows'
         run: |
-          pyinstaller \
+          PYTHONPATH="${PWD}" pyinstaller \
             --name TerminalOS \
             --onefile \
             --collect-all terminalos \
@@ -60,9 +47,26 @@ jobs:
             --clean \
             run_terminalos.py
 
-      # ------------------------------------------------
-      # Package artifacts
-      # ------------------------------------------------
+      # -------------------------------------------------
+      # Windows build (cmd, caret continuation)
+      # -------------------------------------------------
+      - name: Build executable (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          set PYTHONPATH=%CD% && pyinstaller ^
+            --name TerminalOS ^
+            --onefile ^
+            --collect-all terminalos ^
+            --hidden-import textual ^
+            --hidden-import click ^
+            --hidden-import watchdog ^
+            --clean ^
+            run_terminalos.py
+
+      # -------------------------------------------------
+      # Package & upload
+      # -------------------------------------------------
       - name: Prepare artefact
         shell: bash
         run: |
