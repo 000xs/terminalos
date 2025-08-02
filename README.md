@@ -49,11 +49,11 @@ TerminalOS is a full desktop-like experience within your terminal. Built using P
 ###  Installation
 
 ```bash
-git clone https://github.com/000xs/terminalos.git
-cd terminalos
-pip install -r requirements.txt
-pip install -e .
-terminalos
+[downloade](https://github.com/000xs/terminalos/releases/tag/v1.0.0)
+```
+and run
+```
+terminalos.exe
 ```
 
 ## 📋 Requirements
